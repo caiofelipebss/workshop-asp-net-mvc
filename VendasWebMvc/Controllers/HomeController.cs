@@ -23,6 +23,14 @@ namespace VendasWebMvc.Controllers
             return View();
         }
 
+        public IActionResult About()
+        {
+            ViewData["Message"] = "Salles Web App from C# Course";
+            ViewData["Professor"] = "Nélio ALves";
+            ViewData["Aluno"] = "Caio Felipe";
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
