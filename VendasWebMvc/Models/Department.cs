@@ -1,4 +1,5 @@
-﻿
+﻿using VendasWebMvc.Models.ViewModels; 
+
 namespace VendasWebMvc.Models
 {
     public class Department
