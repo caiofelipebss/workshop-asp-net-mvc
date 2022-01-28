@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<VendasWebMvc.Models.Department>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Departments";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
-        <tr>
+        <tr  class="bg-success">
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
