@@ -9,9 +9,9 @@ using VendasWebMvc.Services.Exceptions;
 
 namespace VendasWebMvc.Services
 {
-    public class SellerService 
+    public class SellerService
     {
-        private readonly VendasWebMvcContext _context; 
+        private readonly VendasWebMvcContext _context;
 
         public SellerService(VendasWebMvcContext context)
         {
@@ -19,13 +19,13 @@ namespace VendasWebMvc.Services
         }
 
         // Retorna uma lista com todos os vendedores do BD
-        public async Task<List<Seller>> FindAllAsync() 
+        public async Task<List<Seller>> FindAllAsync()
         {
             return await _context.Seller.ToListAsync();
         }
 
         public async Task InsertAsync(Seller obj)
-        {           
+        {
             _context.Add(obj);
             await _context.SaveChangesAsync();
         }
@@ -37,9 +37,17 @@ namespace VendasWebMvc.Services
 
         public async Task RemoveAsync(int id)
         {
-            var obj = await _context.Seller.FindAsync(id);
-            _context.Seller.Remove(obj);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var obj = await _context.Seller.FindAsync(id);
+                _context.Seller.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException("Can't delete seller because he/she has sales.");
+            }
+
         }
 
         public async Task UpdateAsync(Seller obj)
@@ -51,12 +59,12 @@ namespace VendasWebMvc.Services
             }
             try
             {
-            _context.Update(obj);
-            await _context.SaveChangesAsync();
+                _context.Update(obj);
+                await _context.SaveChangesAsync();
             }
 
             //Se uma exceção de nível de acesso a dados acontecer, lançará uma exceção da camada de serviços. Assim o controlador só conversará apenas com a camada de serviço.
-            catch (DbUpdateConcurrencyException e) 
+            catch (DbUpdateConcurrencyException e)
             {
                 throw new DbConcurrencyException(e.Message);
             }
