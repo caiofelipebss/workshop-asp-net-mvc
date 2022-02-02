@@ -1,4 +1,4 @@
-# Projeto: GUI Web com ASP.NET <h1>
+# Projeto: GUI Web com ASP.NET CORE <h1>
 
 Projeto criado durante o curso de C# do professor Nélio Alves, na Udemy. 
 
